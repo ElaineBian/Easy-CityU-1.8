@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Open splash.html in Firefox (with animation)",
+      "file": "C:\\Users\\18627\\Desktop\\CityU-HUB-1.4-main\\splash.html",
+      "url": "file:///C:/Users/18627/Desktop/CityU-HUB-1.4-main/splash.html",
+      "webRoot": "${workspaceFolder}",
+      "firefoxExecutable": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+      "reAttach": true
+    },
+    {
+      "type": "msedge",
+      "request": "launch",
+      "name": "Open splash.html in Edge (with animation)",
+      "file": "C:\\Users\\18627\\Desktop\\CityU-HUB-1.4-main\\splash.html",
+      "url": "file:///C:/Users/18627/Desktop/CityU-HUB-1.4-main/splash.html",
+      "webRoot": "${workspaceFolder}",
+      "runtimeExecutable": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      "reAttach": true
+    }
+  ]
+}

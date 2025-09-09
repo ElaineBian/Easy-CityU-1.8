@@ -1,0 +1,394 @@
+/* 
+ * Easy CityU - 食堂页面样式
+ * 版本: 1.0.0
+ * 日期: 2025/09/09
+ */
+
+/* ===== 食堂页面主容器 ===== */
+.canteen-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--container-padding);
+    background: var(--bg-primary);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* ===== 页面头部 ===== */
+.canteen-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl);
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+}
+
+.canteen-header h1 {
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+}
+
+.canteen-header p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+}
+
+/* ===== 返回按钮 ===== */
+.back-btn {
+    position: absolute;
+    top: var(--spacing-lg);
+    left: var(--spacing-lg);
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: all var(--transition-normal);
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+}
+
+.back-btn:hover {
+    background: var(--accent-color-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+/* ===== 主要内容区域 ===== */
+.canteen-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.section-card {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+}
+
+.section-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.section-title {
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* ===== 点餐框架 ===== */
+.order-frame {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    background: white;
+}
+
+/* ===== 投票区域 ===== */
+.voting-section {
+    background: var(--bg-secondary);
+}
+
+.vote-status {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.vote-timer {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+/* ===== 食物项目 ===== */
+.food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.food-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-color);
+}
+
+.food-info {
+    flex: 1;
+}
+
+.food-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-md);
+}
+
+.food-description {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.4;
+}
+
+/* ===== 投票控件 ===== */
+.vote-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.vote-count {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-color-hover));
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 20px;
+    font-weight: 600;
+    min-width: 50px;
+    text-align: center;
+    font-size: var(--font-size-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.vote-btn {
+    background: var(--success-color);
+    color: white;
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+}
+
+.vote-btn:hover:not(:disabled) {
+    background: #218838;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.vote-btn:disabled {
+    background: var(--text-light);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===== 排行榜 ===== */
+.top-foods {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, var(--accent-color), #5CBBFF);
+    border-radius: var(--border-radius-md);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.top-foods h4 {
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+.top-food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: var(--font-size-sm);
+}
+
+.top-food-item:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    font-weight: 700;
+    margin-right: var(--spacing-sm);
+    color: #FFD700;
+}
+
+/* ===== 通知样式 ===== */
+.notification {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background: var(--success-color);
+    color: white;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+}
+
+.notification.error {
+    background: var(--error-color);
+}
+
+.notification.info {
+    background: var(--info-color);
+}
+
+/* ===== 动画 ===== */
+@keyframes slideIn {
+    from { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+
+@keyframes slideOut {
+    from { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+    to { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 768px) {
+    .canteen-sections {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .back-btn {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: var(--spacing-lg);
+        width: fit-content;
+    }
+    
+    .order-frame {
+        height: 400px;
+    }
+    
+    .canteen-header {
+        padding: var(--spacing-lg);
+    }
+    
+    .canteen-header h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .section-card {
+        padding: var(--spacing-lg);
+    }
+    
+    .food-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .vote-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .canteen-container {
+        padding: var(--spacing-sm);
+    }
+    
+    .canteen-header {
+        padding: var(--spacing-md);
+    }
+    
+    .section-card {
+        padding: var(--spacing-md);
+    }
+    
+    .order-frame {
+        height: 300px;
+    }
+}
+
+/* ===== 暗色主题特殊适配 ===== */
+[data-theme="dark"] .order-frame {
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .top-foods {
+    background: linear-gradient(135deg, #2C5282, #3182CE);
+}
+
+[data-theme="dark"] .vote-count {
+    background: linear-gradient(135deg, var(--accent-color), #4299E1);
+}
+
+/* ===== 加载状态 ===== */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: var(--text-secondary);
+}
+
+.loading::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: var(--spacing-sm);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,71 @@
+/* Font Awesome 6.0.0 本地版本 - 仅包含项目中使用的图标 */
+
+/* 基础样式 */
+.fas, .fab, .far {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fab {
+    font-weight: 400;
+}
+
+/* 图标映射 - 使用Unicode字符替代字体图标 */
+.fa-search::before, .fas.fa-search::before { content: "🔍"; }
+.fa-folder-tree::before, .fas.fa-folder-tree::before { content: "📁"; }
+.fa-comments::before, .fas.fa-comments::before { content: "💬"; }
+.fa-cloud::before, .fas.fa-cloud::before { content: "☁️"; }
+.fa-shopping-bag::before, .fas.fa-shopping-bag::before { content: "🛍️"; }
+.fa-utensils::before, .fas.fa-utensils::before { content: "🍽️"; }
+.fa-chalkboard-teacher::before, .fas.fa-chalkboard-teacher::before { content: "👨‍🏫"; }
+.fa-graduation-cap::before, .fas.fa-graduation-cap::before { content: "🎓"; }
+.fa-envelope::before, .fas.fa-envelope::before { content: "✉️"; }
+.fa-calendar-alt::before, .fas.fa-calendar-alt::before { content: "📅"; }
+.fa-university::before, .fas.fa-university::before { content: "🏛️"; }
+.fa-camera::before, .fas.fa-camera::before { content: "📷"; }
+.fa-chevron-left::before, .fas.fa-chevron-left::before { content: "‹"; }
+.fa-chevron-right::before, .fas.fa-chevron-right::before { content: "›"; }
+.fa-cloud-upload-alt::before, .fas.fa-cloud-upload-alt::before { content: "☁️⬆️"; }
+.fa-eye::before, .fas.fa-eye::before { content: "👁️"; }
+.fa-heart::before, .fas.fa-heart::before { content: "❤️"; }
+.fa-comment::before, .fas.fa-comment::before { content: "💬"; }
+.fa-facebook::before, .fab.fa-facebook::before { content: "📘"; }
+.fa-twitter::before, .fab.fa-twitter::before { content: "🐦"; }
+.fa-instagram::before, .fab.fa-instagram::before { content: "📷"; }
+.fa-linkedin::before, .fab.fa-linkedin::before { content: "💼"; }
+.fa-poll::before, .fas.fa-poll::before { content: "📊"; }
+.fa-trophy::before, .fas.fa-trophy::before { content: "🏆"; }
+.fa-arrow-left::before, .fas.fa-arrow-left::before { content: "←"; }
+.fa-shopping-cart::before, .fas.fa-shopping-cart::before { content: "🛒"; }
+
+/* 通用图标样式 */
+.fas, .fab, .far {
+    display: inline-block;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 确保图标正确显示 */
+i.fas, i.fab, i.far {
+    font-style: normal;
+}
+
+/* 特殊情况处理 */
+.fa-cloud-upload-alt::before {
+    content: "📤";
+}
+
+.theme-icon-moon::before {
+    content: "🌙";
+}
+
+.theme-icon-sun::before {
+    content: "☀️";
+}

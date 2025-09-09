@@ -1,0 +1,89 @@
+/* 
+ * Easy CityU - 学术资源管理平台
+ * 自动完成功能样式
+ * 版本: 1.0.0
+ * 日期: 2025/09/09
+ */
+
+/* ===== 自动完成容器 ===== */
+.autocomplete-container {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    margin-top: 2px;
+    display: none;
+}
+
+/* 自动完成项目 */
+.autocomplete-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid var(--border-color-light);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+    padding-left: 20px;
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .autocomplete-container {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color-dark);
+}
+
+[data-theme="dark"] .autocomplete-item {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .autocomplete-item:hover {
+    background-color: rgba(74, 144, 226, 0.2);
+}
+
+/* 课程编号输入框样式增强 */
+#courseCode {
+    font-family: 'Consolas', 'Monaco', monospace;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-fast);
+}
+
+#courseCode:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+/* 表单组相对定位，用于自动完成容器定位 */
+.form-group {
+    position: relative;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+    .autocomplete-item {
+        padding: 8px 12px;
+        font-size: var(--font-size-xs);
+    }
+    
+    .autocomplete-item:hover {
+        padding-left: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .autocomplete-container {
+        max-height: 180px;
+    }
+}

@@ -1,0 +1,173 @@
+/* 
+ * Easy CityU - 学术资源管理平台
+ * 主题切换按钮样式
+ * 版本: 1.0.0
+ * 日期: 2025/09/09
+ */
+
+/* ===== 主题切换按钮 ===== */
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    color: var(--text-primary);
+}
+
+/* 按钮悬停效果 */
+.theme-toggle:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+    transform: scale(1.05);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* 按钮图标容器 */
+.theme-icon-container {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 月亮图标 - 暗色模式 */
+.theme-icon-moon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: inset 8px -8px 0 0 var(--text-primary);
+    transform: rotate(-45deg) scale(0.7);
+    transition: all 0.3s ease;
+}
+
+/* 太阳图标 - 亮色模式 */
+.theme-icon-sun {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    transform: scale(0.7);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+/* 太阳光芒 */
+.theme-icon-sun::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 6px;
+    background-color: var(--text-primary);
+    box-shadow: 
+        0 26px 0 var(--text-primary),
+        13px 13px 0 var(--text-primary),
+        -13px 13px 0 var(--text-primary),
+        13px -13px 0 var(--text-primary),
+        -13px -13px 0 var(--text-primary),
+        0 -26px 0 var(--text-primary),
+        26px 0 0 var(--text-primary),
+        -26px 0 0 var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+/* 暗色模式下的图标状态 */
+[data-theme="dark"] .theme-icon-moon {
+    transform: rotate(-45deg) scale(0);
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon-sun {
+    transform: scale(0.7);
+    opacity: 1;
+}
+
+/* 按钮焦点样式 */
+.theme-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+}
+
+/* 按钮波纹效果 */
+.theme-toggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(74, 144, 226, 0.3);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.theme-toggle:focus:not(:active)::after {
+    animation: ripple 0.5s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0) translate(-50%, -50%);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20) translate(-50%, -50%);
+        opacity: 0;
+    }
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .theme-icon-container {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .theme-icon-moon,
+    .theme-icon-sun {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .theme-icon-container {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .theme-icon-moon,
+    .theme-icon-sun {
+        width: 16px;
+        height: 16px;
+    }
+}

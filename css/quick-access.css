@@ -1,0 +1,269 @@
+/* 
+ * Easy CityU - 学术资源管理平台
+ * 一键直达功能区样式
+ * 版本: 1.0.0
+ * 日期: 2025/09/09
+ */
+
+/* ===== 特色功能和一键直达区域布局 ===== */
+.features-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.features-section,
+.quick-access-section {
+    width: 100%;
+}
+
+.quick-access-section {
+    background-color: rgba(74, 144, 226, 0.05);
+    padding: 30px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(74, 144, 226, 0.1);
+}
+
+.section-title {
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 12px;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 3px;
+}
+
+.quick-access-section .section-title {
+    color: var(--accent-color);
+}
+
+/* ===== 一键直达按钮 ===== */
+.quick-access-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.quick-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 25px 15px;
+    background: var(--bg-primary);
+    border: 1px solid rgba(74, 144, 226, 0.15);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.05) 0%, rgba(74, 144, 226, 0) 100%);
+    z-index: 0;
+}
+
+.quick-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.3);
+    border-color: transparent;
+}
+
+.quick-btn i {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.15) 0%, rgba(74, 144, 226, 0.05) 100%);
+    color: var(--accent-color);
+    border-radius: 50%;
+    font-size: 22px;
+    transition: all var(--transition-normal);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+}
+
+.quick-btn:hover i {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.quick-btn span {
+    text-align: center;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
+}
+
+/* 第五个按钮跨两列居中 */
+.quick-btn:nth-child(5) {
+    grid-column: 2 / 4;
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 1200px) {
+    .features-sections {
+        gap: 50px;
+    }
+    
+    .quick-access-section {
+        padding: 25px;
+    }
+    
+    .quick-btn {
+        padding: 20px 15px;
+    }
+    
+    .quick-btn i {
+        width: 55px;
+        height: 55px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .features-sections {
+        gap: 40px;
+    }
+    
+    .quick-access-section {
+        padding: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .quick-access-buttons {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    
+    .quick-btn {
+        padding: 18px 12px;
+    }
+    
+    .quick-btn i {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
+    
+    .quick-btn:nth-child(5) {
+        grid-column: 2 / 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .features-sections {
+        gap: 30px;
+    }
+    
+    .quick-access-section {
+        padding: 15px;
+        border-radius: 12px;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .quick-access-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 20px;
+    }
+    
+    .quick-btn {
+        padding: 15px 10px;
+        gap: 10px;
+        border-radius: 12px;
+    }
+    
+    .quick-btn i {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+    
+    .quick-btn span {
+        font-size: 0.9rem;
+    }
+    
+    .quick-btn:hover {
+        transform: translateY(-5px);
+    }
+    
+    .quick-btn:nth-child(5) {
+        grid-column: 1 / 3;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-sections {
+        gap: 25px;
+    }
+    
+    .quick-access-section {
+        padding: 12px;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .quick-access-buttons {
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .quick-btn {
+        padding: 12px 8px;
+        gap: 8px;
+        border-radius: 10px;
+    }
+    
+    .quick-btn i {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .quick-btn span {
+        font-size: 0.85rem;
+    }
+}
