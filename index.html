@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Easy CityU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        var played = window.localStorage && localStorage.getItem('splashPlayed');
+        if (played !== '1') {
+          // 首次访问：只打开一次开场动画
+          window.location.replace('splash.html');
+        } else {
+          // 非首次：直接进入主页，不出现任何过渡页/弹窗
+          window.location.replace('main.html');
+        }
+      } catch (e) {
+        // 极端情况下（禁用存储）直接进入主页，避免二次打开
+        window.location.replace('main.html');
+      }
+    })();
+  </script>
+</head>
+<body>
+</body>
+</html>

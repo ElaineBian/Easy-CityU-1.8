@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS1315: 计算机程序设计导论 - Easy CityU</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/fontawesome-local.css">
+    <style>
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .note-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .note-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .note-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .note-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .note-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1em;
+        }
+        
+        .note-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-content {
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .subsection {
+            margin-bottom: 20px;
+        }
+        
+        .subsection-title {
+            color: var(--secondary-color);
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .course-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .cilo-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .cilo-item {
+            background: var(--bg-secondary);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .cilo-percentage {
+            color: var(--accent-color);
+            font-weight: 600;
+            float: right;
+        }
+        
+        .assessment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .assessment-table th,
+        .assessment-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .assessment-table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .assessment-table tr:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .keyword {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .note-id {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn:hover {
+            background: var(--secondary-color);
+        }
+        
+        .lang-btn.active {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .note-container {
+                padding: 10px;
+            }
+            
+            .note-header {
+                padding: 20px;
+            }
+            
+            .note-title {
+                font-size: 2em;
+            }
+            
+            .note-meta {
+                gap: 15px;
+            }
+            
+            .course-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-button {
+                position: relative;
+                margin-bottom: 20px;
+            }
+            
+            .language-switcher {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goToResourcesSection()">
+        <i class="fas fa-arrow-left"></i>
+        <span data-translate="back_to_resources">返回浏览资料</span>
+    </button>
+
+    <!-- 语言切换按钮 -->
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('zh')" data-lang="zh">简体</button>
+        <button class="lang-btn" onclick="switchLanguage('zh-tw')" data-lang="zh-tw">繁體</button>
+        <button class="lang-btn" onclick="switchLanguage('en')" data-lang="en">EN</button>
+    </div>
+
+    <div class="note-container">
+        <div class="note-header">
+            <div class="note-id">编号: CS1315-001</div>
+            <h1 class="note-title" data-translate="course_title">CS1315: 计算机程序设计导论</h1>
+            <p class="note-subtitle" data-translate="course_subtitle">Introduction to Computer Programming</p>
+            <div class="note-meta">
+                <div class="note-meta-item">
+                    <i class="fas fa-university"></i>
+                    <span data-translate="department">工学院 - 计算机科学系</span>
+                </div>
+                <div class="note-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span data-translate="academic_year">2025学年</span>
+                </div>
+                <div class="note-meta-item">
+                    <i class="fas fa-star"></i>
+                    <span data-translate="credits">3学分</span>
+                </div>
+                <div class="note-meta-item">
+                    <i class="fas fa-level-up-alt"></i>
+                    <span data-translate="course_level">本科课程</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="note-content">
+            <h2 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                <span data-translate="basic_info">I. 课程基础信息</span>
+            </h2>
+            <div class="course-info">
+                <div class="info-item">
+                    <div class="info-label" data-zh="课程名称" data-zh-tw="課程名稱" data-en="Course Name">课程名称</div>
+                    <div data-zh="计算机程序设计导论" data-zh-tw="計算機程序設計導論" data-en="Introduction to Computer Programming">计算机程序设计导论</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-zh="课程代码" data-zh-tw="課程代碼" data-en="Course Code">课程代码</div>
+                    <div>CS1315</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-zh="学术单位" data-zh-tw="學術單位" data-en="Academic Unit">学术单位</div>
+                    <div data-zh="计算机科学系(CS), 工学院(EG)" data-zh-tw="計算機科學系(CS), 工學院(EG)" data-en="Computer Science (CS), College of Engineering (EG)">计算机科学系(CS), 工学院(EG)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-zh="课程时长" data-zh-tw="課程時長" data-en="Duration">课程时长</div>
+                    <div data-zh="1学期" data-zh-tw="1學期" data-en="1 Semester">1学期</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-zh="学分" data-zh-tw="學分" data-en="Credits">学分</div>
+                    <div data-zh="3学分" data-zh-tw="3學分" data-en="3 Credits">3学分</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-zh="课程级别" data-zh-tw="課程級別" data-en="Level">课程级别</div>
+                    <div data-zh="学士学位 (B1-B4)" data-zh-tw="學士學位 (B1-B4)" data-en="Bachelor's Degree (B1-B4)">学士学位 (B1-B4)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-zh="授课语言" data-zh-tw="授課語言" data-en="Language">授课语言</div>
+                    <div data-zh="英语 (教学和评估)" data-zh-tw="英語 (教學和評估)" data-en="English (Teaching and Assessment)">英语 (教学和评估)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-zh="先修课程" data-zh-tw="先修課程" data-en="Prerequisites">先修课程</div>
+                    <div data-zh="无" data-zh-tw="無" data-en="None">无</div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title" data-zh="等效课程" data-zh-tw="等效課程" data-en="Equivalent Courses">等效课程</div>
+                <p data-zh="CS2315 计算机程序设计" data-zh-tw="CS2315 計算機程序設計" data-en="CS2315 Computer Programming">CS2315 计算机程序设计</p>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title" data-zh="互斥课程" data-zh-tw="互斥課程" data-en="Mutually Exclusive Courses">互斥课程</div>
+                <p data-zh="CS2310, CS2311, CS2313, CS2360 Java程序设计" data-zh-tw="CS2310, CS2311, CS2313, CS2360 Java程序設計" data-en="CS2310, CS2311, CS2313, CS2360 Java Programming">CS2310, CS2311, CS2313, CS2360 Java程序设计</p>
+            </div>
+        </div>
+
+        <div class="note-content">
+            <h2 class="section-title">
+                <i class="fas fa-target"></i>
+                <span data-zh="II. 学习目标" data-zh-tw="II. 學習目標" data-en="II. Learning Objectives">II. 学习目标</span>
+            </h2>
+            <div class="section-content">
+                <p><strong data-zh="课程目标：" data-zh-tw="課程目標：" data-en="Course Objective:">课程目标：</strong><span data-zh="教授程序设计概念、技术和面向对象基础；培养实际编程技能。无需编程经验。" data-zh-tw="教授程序設計概念、技術和面向對象基礎；培養實際編程技能。無需編程經驗。" data-en="Teach programming concepts, techniques and object-oriented fundamentals; develop practical programming skills. No programming experience required.">教授程序设计概念、技术和面向对象基础；培养实际编程技能。无需编程经验。</span></p>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title" data-zh="课程预期学习成果 (CILOs)" data-zh-tw="課程預期學習成果 (CILOs)" data-en="Course Intended Learning Outcomes (CILOs)">课程预期学习成果 (CILOs)</div>
+                <ul class="cilo-list">
+                    <li class="cilo-item">
+                        <span data-zh="解释面向对象程序结构" data-zh-tw="解釋面向對象程序結構" data-en="Explain object-oriented program structure">解释面向对象程序结构</span>
+                        <span class="cilo-percentage">10%</span>
+                    </li>
+                    <li class="cilo-item">
+                        <span data-zh="分析、测试和调试程序" data-zh-tw="分析、測試和調試程序" data-en="Analyze, test and debug programs">分析、测试和调试程序</span>
+                        <span class="cilo-percentage">15%</span>
+                    </li>
+                    <li class="cilo-item">
+                        <span data-zh="使用简单算法和数据结构解决任务" data-zh-tw="使用簡單算法和數據結構解決任務" data-en="Use simple algorithms and data structures to solve tasks">使用简单算法和数据结构解决任务</span>
+                        <span class="cilo-percentage">60%</span>
+                    </li>
+                    <li class="cilo-item">
+                        <span data-zh="设计结构良好的程序并遵循良好实践" data-zh-tw="設計結構良好的程序並遵循良好實踐" data-en="Design well-structured programs and follow good practices">设计结构良好的程序并遵循良好实践</span>
+                        <span class="cilo-percentage">15%</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title" data-zh="DEC维度" data-zh-tw="DEC維度" data-en="DEC Dimensions">DEC维度</div>
+                <ul>
+                    <li><strong data-zh="A1 (态度):" data-zh-tw="A1 (態度):" data-en="A1 (Attitude):">A1 (态度):</strong> <span data-zh="好奇心、探究精神和挑战假设" data-zh-tw="好奇心、探究精神和挑戰假設" data-en="Curiosity, inquiry spirit and challenging assumptions">好奇心、探究精神和挑战假设</span></li>
+                    <li><strong data-zh="A2 (能力):" data-zh-tw="A2 (能力):" data-en="A2 (Ability):">A2 (能力):</strong> <span data-zh="批判性思维、研究技能和跨学科应用" data-zh-tw="批判性思維、研究技能和跨學科應用" data-en="Critical thinking, research skills and interdisciplinary application">批判性思维、研究技能和跨学科应用</span></li>
+                    <li><strong data-zh="A3 (成就):" data-zh-tw="A3 (成就):" data-en="A3 (Achievement):">A3 (成就):</strong> <span data-zh="创造解决方案或产品" data-zh-tw="創造解決方案或產品" data-en="Create solutions or products">创造解决方案或产品</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="note-content">
+            <h2 class="section-title">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span data-zh="III. 教学活动" data-zh-tw="III. 教學活動" data-en="III. Teaching Activities">III. 教学活动</span>
+            </h2>
+            <div class="subsection">
+                <div class="subsection-title" data-zh="讲座 (每周3小时)" data-zh-tw="講座 (每週3小時)" data-en="Lectures (3 hours per week)">讲座 (每周3小时)</div>
+                <p data-zh="通过实例介绍编程概念 (涵盖所有CILOs)" data-zh-tw="通過實例介紹編程概念 (涵蓋所有CILOs)" data-en="Introduce programming concepts through examples (covers all CILOs)">通过实例介绍编程概念 (涵盖所有CILOs)</p>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title" data-zh="实验 (每周1小时)" data-zh-tw="實驗 (每週1小時)" data-en="Laboratory (1 hour per week)">实验 (每周1小时)</div>
+                <p data-zh="在IDE中进行实际编程，获得反馈 (涵盖所有CILOs)" data-zh-tw="在IDE中進行實際編程，獲得反饋 (涵蓋所有CILOs)" data-en="Hands-on programming in IDE with feedback (covers all CILOs)">在IDE中进行实际编程，获得反馈 (涵盖所有CILOs)</p>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title" data-zh="作业 (课后)" data-zh-tw="作業 (課後)" data-en="Assignments (After class)">作业 (课后)</div>
+                <p data-zh="需要设计、实现和文档编写的综合任务 (涵盖CILOs 2, 3, 4)" data-zh-tw="需要設計、實現和文檔編寫的綜合任務 (涵蓋CILOs 2, 3, 4)" data-en="Comprehensive tasks requiring design, implementation and documentation (covers CILOs 2, 3, 4)">需要设计、实现和文档编写的综合任务 (涵盖CILOs 2, 3, 4)</p>
+            </div>
+        </div>
+
+        <div class="note-content">
+            <h2 class="section-title">
+                <i class="fas fa-clipboard-check"></i>
+                <span data-zh="IV. 评估方式" data-zh-tw="IV. 評估方式" data-en="IV. Assessment Methods">IV. 评估方式</span>
+            </h2>
+            <table class="assessment-table">
+                <thead>
+                    <tr>
+                        <th data-zh="评估类型" data-zh-tw="評估類型" data-en="Assessment Type">评估类型</th>
+                        <th data-zh="权重" data-zh-tw="權重" data-en="Weight">权重</th>
+                        <th data-zh="内容" data-zh-tw="內容" data-en="Content">内容</th>
+                        <th data-zh="涵盖CILOs" data-zh-tw="涵蓋CILOs" data-en="Covers CILOs">涵盖CILOs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-zh="持续评估" data-zh-tw="持續評估" data-en="Continuous Assessment">持续评估</td>
+                        <td>40%</td>
+                        <td data-zh="测验 + 作业" data-zh-tw="測驗 + 作業" data-en="Quizzes + Assignments">测验 + 作业</td>
+                        <td>1, 2, 3, 4</td>
+                    </tr>
+                    <tr>
+                        <td data-zh="- 测验" data-zh-tw="- 測驗" data-en="- Quizzes">- 测验</td>
+                        <td>20%</td>
+                        <td data-zh="解释程序结构" data-zh-tw="解釋程序結構" data-en="Explain program structure">解释程序结构</td>
+                        <td>1, 3, 4</td>
+                    </tr>
+                    <tr>
+                        <td data-zh="- 作业" data-zh-tw="- 作業" data-en="- Assignments">- 作业</td>
+                        <td>20%</td>
+                        <td data-zh="测试程序正确性" data-zh-tw="測試程序正確性" data-en="Test program correctness">测试程序正确性</td>
+                        <td>2, 3, 4</td>
+                    </tr>
+                    <tr>
+                        <td data-zh="期末考试" data-zh-tw="期末考試" data-en="Final Exam">期末考试</td>
+                        <td>60%</td>
+                        <td data-zh="2小时考试" data-zh-tw="2小時考試" data-en="2-hour exam">2小时考试</td>
+                        <td data-zh="主要CILO 3" data-zh-tw="主要CILO 3" data-en="Mainly CILO 3">主要CILO 3</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="subsection">
+                <div class="subsection-title" data-zh="评分标准" data-zh-tw="評分標準" data-en="Grading Criteria">评分标准</div>
+                <p data-zh="测验、作业和考试的评分标准从"优秀 (A+–A-)"到"不及格 (F)"，评估程序解释、技术应用和分析等技能。" data-zh-tw="測驗、作業和考試的評分標準從"優秀 (A+–A-)"到"不及格 (F)"，評估程序解釋、技術應用和分析等技能。" data-en="Grading criteria for quizzes, assignments and exams range from 'Excellent (A+–A-)' to 'Fail (F)', assessing skills in program explanation, technical application and analysis.">测验、作业和考试的评分标准从"优秀 (A+–A-)"到"不及格 (F)"，评估程序解释、技术应用和分析等技能。</p>
+                <p><strong data-zh="通过要求：" data-zh-tw="通過要求：" data-en="Pass Requirement:">通过要求：</strong><span data-zh="期末考试需获得≥30%的最高分数" data-zh-tw="期末考試需獲得≥30%的最高分數" data-en="Final exam requires ≥30% of maximum score">期末考试需获得≥30%的最高分数</span></p>
+            </div>
+        </div>
+
+        <div class="note-content">
+            <h2 class="section-title">
+                <i class="fas fa-book-open"></i>
+                <span data-zh="V. 课程内容" data-zh-tw="V. 課程內容" data-en="V. Course Content">V. 课程内容</span>
+            </h2>
+            <div class="keywords">
+                <span class="keyword" data-zh="程序设计" data-zh-tw="程序設計" data-en="Programming">程序设计</span>
+                <span class="keyword" data-zh="算法" data-zh-tw="算法" data-en="Algorithms">算法</span>
+                <span class="keyword" data-zh="编程语言" data-zh-tw="編程語言" data-en="Programming Languages">编程语言</span>
+                <span class="keyword" data-zh="控制结构" data-zh-tw="控制結構" data-en="Control Structures">控制结构</span>
+                <span class="keyword" data-zh="数据类型" data-zh-tw="數據類型" data-en="Data Types">数据类型</span>
+                <span class="keyword" data-zh="数组" data-zh-tw="數組" data-en="Arrays">数组</span>
+                <span class="keyword" data-zh="文件I/O" data-zh-tw="文件I/O" data-en="File I/O">文件I/O</span>
+                <span class="keyword" data-zh="面向对象编程" data-zh-tw="面向對象編程" data-en="Object-Oriented Programming">面向对象编程</span>
+                <span class="keyword" data-zh="测试" data-zh-tw="測試" data-en="Testing">测试</span>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title" data-zh="课程模块" data-zh-tw="課程模塊" data-en="Course Modules">课程模块</div>
+                <ul>
+                    <li><strong data-zh="计算机与编程：" data-zh-tw="計算機與編程：" data-en="Computers and Programming:">计算机与编程：</strong><span data-zh="软件层次结构、开发过程、环境" data-zh-tw="軟件層次結構、開發過程、環境" data-en="Software hierarchy, development process, environment">软件层次结构、开发过程、环境</span></li>
+                    <li><strong data-zh="编程技术：" data-zh-tw="編程技術：" data-en="Programming Techniques:">编程技术：</strong><span data-zh="算法、模块化分解、变量、控制流" data-zh-tw="算法、模塊化分解、變量、控制流" data-en="Algorithms, modular decomposition, variables, control flow">算法、模块化分解、变量、控制流</span></li>
+                    <li><strong data-zh="数据结构：" data-zh-tw="數據結構：" data-en="Data Structures:">数据结构：</strong><span data-zh="类型、数组、字符串、文件、类、封装" data-zh-tw="類型、數組、字符串、文件、類、封裝" data-en="Types, arrays, strings, files, classes, encapsulation">类型、数组、字符串、文件、类、封装</span></li>
+                    <li><strong data-zh="开发实践：" data-zh-tw="開發實踐：" data-en="Development Practices:">开发实践：</strong><span data-zh="编码风格、测试、文档编写" data-zh-tw="編碼風格、測試、文檔編寫" data-en="Coding style, testing, documentation">编码风格、测试、文档编写</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="note-content">
+            <h2 class="section-title">
+                <i class="fas fa-book"></i>
+                <span data-zh="VI. 阅读清单" data-zh-tw="VI. 閱讀清單" data-en="VI. Reading List">VI. 阅读清单</span>
+            </h2>
+            <div class="subsection">
+                <div class="subsection-title" data-zh="必读教材" data-zh-tw="必讀教材" data-en="Required Textbook">必读教材</div>
+                <p><strong data-zh="《C++程序设计基础》" data-zh-tw="《C++程序設計基礎》" data-en="Fundamentals of C++ Programming">《C++程序设计基础》</strong><br>
+                <span data-zh="作者：Richard L. Halterman (2018)" data-zh-tw="作者：Richard L. Halterman (2018)" data-en="Author: Richard L. Halterman (2018)">作者：Richard L. Halterman (2018)</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script>
+        // 初始化主题
+        if (typeof APP !== 'undefined' && APP.Theme) {
+            APP.Theme.init();
+        }
+
+        function goToResourcesSection() {
+            // 跳转到主页的浏览资料部分
+            window.location.href = 'main.html#resources';
+        }
+
+        // 多语言翻译数据
+        const translations = {
+            zh: {
+                back_to_resources: "返回浏览资料",
+                course_title: "CS1315: 计算机程序设计导论",
+                course_subtitle: "Introduction to Computer Programming",
+                department: "工学院 - 计算机科学系",
+                academic_year: "2025学年",
+                credits: "3学分",
+                course_level: "本科课程",
+                basic_info: "I. 课程基础信息"
+            },
+            'zh-tw': {
+                back_to_resources: "返回瀏覽資料",
+                course_title: "CS1315: 計算機程序設計導論",
+                course_subtitle: "Introduction to Computer Programming",
+                department: "工學院 - 計算機科學系",
+                academic_year: "2025學年",
+                credits: "3學分",
+                course_level: "本科課程",
+                basic_info: "I. 課程基礎信息"
+            },
+            en: {
+                back_to_resources: "Back to Resources",
+                course_title: "CS1315: Introduction to Computer Programming",
+                course_subtitle: "Introduction to Computer Programming",
+                department: "College of Engineering - Computer Science",
+                academic_year: "Academic Year 2025",
+                credits: "3 Credits",
+                course_level: "Undergraduate Course",
+                basic_info: "I. Basic Course Information"
+            }
+        };
+
+        // 语言切换功能
+        function switchLanguage(lang) {
+            // 更新按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+
+            // 更新使用翻译对象的元素
+            const translateElements = document.querySelectorAll('[data-translate]');
+            translateElements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // 更新所有带有多语言数据属性的元素
+            document.querySelectorAll('[data-zh]').forEach(element => {
+                if (element.getAttribute(`data-${lang}`)) {
+                    element.textContent = element.getAttribute(`data-${lang}`);
+                }
+            });
+
+            // 保存语言选择
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        // 页面加载时恢复语言设置
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('selectedLanguage') || 'zh';
+            switchLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>

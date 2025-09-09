@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - Easy CityU</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/fontawesome-local.css">
+    <meta name="description" content="Easy CityU 登录页面 - 香港城市大学学术资源管理平台">
+    <link rel="preload" href="images/cityu-logo.png" as="image">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <!-- 背景装饰 -->
+        <div class="auth-background">
+            <div class="bg-shape shape-1"></div>
+            <div class="bg-shape shape-2"></div>
+            <div class="bg-shape shape-3"></div>
+        </div>
+        
+        <!-- 主要内容 -->
+        <div class="auth-content">
+            <!-- 左侧品牌区域 -->
+            <div class="auth-brand">
+                <div class="brand-logo">
+                    <img src="images/cityu-logo.png" alt="CityU Logo" class="logo-img">
+                    <h1 class="brand-title" data-translate="site_name">Easy CityU</h1>
+                    <p class="brand-subtitle" data-translate="hero_subtitle">城大学术资源管理平台</p>
+                </div>
+                <div class="brand-features">
+                    <div class="features-section">
+                        <h3 class="section-title" data-translate="platform_features">平台特色</h3>
+                        <div class="feature-items">
+                            <div class="feature-item">
+                                <i class="fas fa-search"></i>
+                                <span data-translate="smart_search">智能搜索</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-share-alt"></i>
+                                <span data-translate="resource_sharing">资源共享</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span data-translate="student_forum">学生论坛</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-access-section">
+                        <h3 class="section-title" data-translate="quick_access">一键直达</h3>
+                        <div class="quick-access-buttons">
+                            <a href="https://www.cityu.edu.hk/zh-cn" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="cityu_portal">
+                                <i class="fas fa-university"></i>
+                                <span data-translate="cityu_portal">又一城</span>
+                            </a>
+                            <a href="https://canvas.cityu.edu.hk" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="canvas">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span data-translate="canvas">Canvas</span>
+                            </a>
+                            <a href="https://aims.cityu.edu.hk" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="aims">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span data-translate="aims">AIMS</span>
+                            </a>
+                            <a href="https://outlook.office365.com" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="outlook">
+                                <i class="fas fa-envelope"></i>
+                                <span data-translate="outlook">Outlook</span>
+                            </a>
+                            <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="calendar">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span data-translate="calendar">日程表</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧登录表单 -->
+            <div class="auth-form-container">
+                <div class="auth-form-wrapper">
+                    <div class="auth-header">
+                        <h2 class="auth-title" data-translate="login">登录</h2>
+                        <p class="auth-description" data-translate="login_description">欢迎回到 Easy CityU</p>
+                    </div>
+                    
+                    <form class="auth-form" id="loginForm">
+                        <div class="form-group">
+                            <label for="email" data-translate="email">邮箱</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    required 
+                                    data-translate-placeholder="email_placeholder"
+                                    placeholder="请输入您的邮箱地址"
+                                >
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" data-translate="password">密码</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    required 
+                                    data-translate-placeholder="password_placeholder"
+                                    placeholder="请输入您的密码"
+                                >
+                                <button type="button" class="password-toggle" aria-label="显示/隐藏密码">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-wrapper">
+                                <input type="checkbox" id="remember" name="remember">
+                                <span class="checkmark"></span>
+                                <span data-translate="remember_me">记住我</span>
+                            </label>
+                            <a href="#" class="forgot-password" data-translate="forgot_password">忘记密码？</a>
+                        </div>
+                        
+                        <button type="submit" class="auth-btn primary" data-translate="login">
+                            <span class="btn-text">登录</span>
+                            <i class="fas fa-arrow-right btn-icon"></i>
+                        </button>
+                        
+                        <div class="divider">
+                            <span data-translate="or">或</span>
+                        </div>
+                        
+                        <div class="social-login">
+                            <button type="button" class="social-btn google">
+                                <i class="fab fa-google"></i>
+                                <span data-translate="login_with_google">使用 Google 登录</span>
+                            </button>
+                            <button type="button" class="social-btn microsoft">
+                                <i class="fab fa-microsoft"></i>
+                                <span data-translate="login_with_microsoft">使用 Microsoft 登录</span>
+                            </button>
+                        </div>
+                        
+                        <div class="auth-switch">
+                            <span data-translate="no_account">还没有账户？</span>
+                            <a href="register.html" class="switch-link" data-translate="register_now">立即注册</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 返回首页按钮 -->
+        <a href="main.html" class="back-home" aria-label="返回首页">
+            <i class="fas fa-home"></i>
+            <span data-translate="back_home">返回首页</span>
+        </a>
+        
+        <!-- 语言切换器 -->
+        <div class="language-selector auth-language">
+            <select id="languageSelect">
+                <option value="zh">简体中文</option>
+                <option value="zh-tw">繁體中文</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+    </div>
+    
+    <!-- 脚本 -->
+    <script src="js/language.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy CityU - 学术资源管理平台</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/fontawesome-local.css">
+    <meta name="description" content="Easy CityU - 香港城市大学学术资源管理平台，提供课程资料、论文、笔记等学术资源的分类管理和搜索服务。">
+    <!-- 预加载校徽图片 -->
+    <link rel="preload" href="images/cityu-logo.png" as="image">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="https://www.cityu.edu.hk/zh-cn" target="_blank" rel="noopener noreferrer">
+                    <div class="logo-container">
+                        <img src="images/cityu-logo.png" alt="CityU Logo" class="logo-img">
+                        <span class="logo-text" data-translate="site_name">Easy CityU</span>
+                    </div>
+                </a>
+            </div>
+            
+            <button class="menu-toggle" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="main.html" class="active" data-translate="home">首页</a></li>
+                    <li><a href="#resources" data-translate="browse">浏览资源</a></li>
+                    <li><a href="#forum" data-translate="forum">学生论坛</a></li>
+                    <li><a href="#about" data-translate="about">关于我们</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <div class="language-selector">
+                        <select id="languageSelect">
+                            <option value="zh">简体中文</option>
+                            <option value="zh-tw">繁體中文</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+                    
+                    <button id="themeToggle" class="theme-toggle" aria-label="切换主题" title="切换主题">
+                        <div class="theme-icon-container">
+                            <div class="theme-icon-moon"></div>
+                            <div class="theme-icon-sun"></div>
+                        </div>
+                    </button>
+                    
+                    <div class="auth-buttons">
+                        <a href="login.html" class="btn btn-outline" data-translate="login">登录</a>
+                        <a href="register.html" class="btn btn-primary" data-translate="register">注册</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('images/cityu-bg1.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('images/cityu-bg2.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('images/cityu-bg3.jpg')"></div>
+            
+            <!-- 滑块控制 -->
+            <div class="slider-controls">
+                <button class="slider-prev" aria-label="上一张"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-indicators">
+                    <button class="slider-indicator active" data-slide="0" aria-label="第1张幻灯片"></button>
+                    <button class="slider-indicator" data-slide="1" aria-label="第2张幻灯片"></button>
+                    <button class="slider-indicator" data-slide="2" aria-label="第3张幻灯片"></button>
+                </div>
+                <button class="slider-next" aria-label="下一张"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title" data-translate="site_name">Easy CityU</h1>
+                <p class="hero-subtitle" data-translate="hero_subtitle">您的学术资源管理平台</p>
+                
+                <div class="search-box">
+                    <input type="text" id="mainSearch" placeholder="搜索课程、专业、论文..." data-translate-placeholder="search_placeholder">
+                    <button id="searchBtn" class="btn btn-primary" data-translate="search_button">搜索</button>
+                    <button id="photoSearchBtn" aria-label="拍照搜索">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <div id="searchSuggestions" class="search-suggestions"></div>
+                </div>
+                
+                <div class="quick-filters">
+                    <div class="filter-group">
+                        <label for="degreeFilter" data-translate="degree_type">学位类型</label>
+                        <select id="degreeFilter">
+                            <option value="all" data-translate="all_degrees">所有学位</option>
+                            <option value="bachelor" data-translate="bachelor">学士</option>
+                            <option value="master" data-translate="master">硕士</option>
+                            <option value="phd" data-translate="phd">博士</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="fieldFilter" data-translate="field">领域</label>
+                        <select id="fieldFilter">
+                            <option value="all" data-translate="all_fields">所有领域</option>
+                            <option value="engineering" data-translate="engineering">工程学</option>
+                            <option value="business" data-translate="business">商学</option>
+                            <option value="science" data-translate="science">理学</option>
+                            <option value="arts" data-translate="arts">文学</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="yearFilter" data-translate="year">年份</label>
+                        <select id="yearFilter">
+                            <option value="all" data-translate="all_years">所有年份</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 几何装饰元素 -->
+        <div class="geometric-elements">
+            <div class="geo-element geo-circle"></div>
+            <div class="geo-element geo-square"></div>
+            <div class="geo-element geo-triangle"></div>
+            <div class="geo-element geo-line"></div>
+        </div>
+    </section>
+
+    <!-- 特色功能 -->
+    <section class="features">
+        <div class="container">
+            <div class="features-sections">
+                <!-- 平台特色功能 -->
+                <div class="features-section">
+                    <h2 class="section-title" data-translate="platform_features">平台特色功能</h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 data-translate="smart_search">智能搜索</h3>
+                            <p data-translate="smart_search_desc">支持文本和拍照搜索，快速找到所需资源</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-folder-tree"></i>
+                            </div>
+                            <h3 data-translate="resource_management">资源管理</h3>
+                            <p data-translate="resource_management_desc">按学位、专业、年份精细分类管理</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3 data-translate="student_forum">学生论坛</h3>
+                            <p data-translate="student_forum_desc">分享笔记、讨论问题、互助学习</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h3 data-translate="cloud_storage">云端存储</h3>
+                            <p data-translate="cloud_storage_desc">安全可靠的文件存储和分享服务</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 一键直达功能区 -->
+                <div class="quick-access-section">
+                    <h2 class="section-title" data-translate="quick_access">一键直达</h2>
+                    
+                    <div class="quick-access-buttons">
+                        <a href="https://www.festivalwalk.com.hk/zh-hk/itinerary-planner/result?itinerary=shopping,with-my-friends" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="cityu_portal">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span data-translate="cityu_portal">又一城</span>
+                        </a>
+                        <a href="canteen.html" class="quick-btn" data-translate-title="canteen">
+                            <i class="fas fa-utensils"></i>
+                            <span data-translate="canteen">食堂点餐</span>
+                        </a>
+                        <a href="https://canvas.cityu.edu.hk/" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="canvas">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span data-translate="canvas">Canvas</span>
+                        </a>
+                        <a href="https://banweb.cityu.edu.hk/pls/PROD/twbkwbis.P_GenMenu?name=bmenu.P_MainMnu" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="aims">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span data-translate="aims">AIMS</span>
+                        </a>
+                        <a href="https://outlook.office.com/mail/" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="outlook">
+                            <i class="fas fa-envelope"></i>
+                            <span data-translate="outlook">Outlook邮箱</span>
+                        </a>
+                        <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="quick-btn" data-translate-title="calendar">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span data-translate="calendar">日程表</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学生论坛 -->
+    <section id="forum" class="forum">
+        <div class="container">
+            <h2 class="section-title" data-translate="student_forum">学生论坛</h2>
+            
+            <div class="forum-tabs">
+                <button class="forum-tab active" data-tab="upload" data-translate="upload_resources">上传资源</button>
+                <button class="forum-tab" data-tab="recent" data-translate="recent_posts">最新帖子</button>
+                <button class="forum-tab" data-tab="popular" data-translate="popular_posts">热门讨论</button>
+            </div>
+            
+            <div class="forum-contents">
+                <!-- 上传资源 -->
+                <div class="forum-content active" data-content="upload">
+                    <div class="upload-section">
+                        <div id="uploadArea" class="upload-area">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <p data-translate="drag_drop_files">拖拽文件到此处或点击上传</p>
+                            <input type="file" id="fileInput" multiple hidden>
+                            <button class="btn btn-outline" id="selectFilesBtn" data-translate="select_files">选择文件</button>
+                        </div>
+                        
+                        <form id="fileInfoForm" class="file-info-form">
+                            <h3 data-translate="file_information">文件信息</h3>
+                            
+                            <div class="form-group">
+                                <label for="courseCode" data-translate="course_code">课程编号</label>
+                                <input type="text" id="courseCode" placeholder="例如：GE1401" data-translate-placeholder="course_code_placeholder" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fileType" data-translate="file_type">文件类型</label>
+                                <select id="fileType" required>
+                                    <option value="" data-translate="select_type">选择类型</option>
+                                    <option value="notes" data-translate="course_notes">课程笔记</option>
+                                    <option value="assignment" data-translate="assignment_answers">作业答案</option>
+                                    <option value="review" data-translate="review_materials">复习资料</option>
+                                    <option value="slides" data-translate="course_slides">课程课件</option>
+                                    <option value="exams" data-translate="past_exams">往年试题</option>
+                                    <option value="project" data-translate="project_reports">项目报告</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="college" data-translate="college">学院</label>
+                                <select id="college" required>
+                                    <option value="" data-translate="select_college">选择学院</option>
+                                    <option value="engineering">工学院</option>
+                                    <option value="business">商学院</option>
+                                    <option value="science">理学院</option>
+                                    <option value="liberal">人文社科学院</option>
+                                    <option value="law">法学院</option>
+                                    <option value="creative">创意媒体学院</option>
+                                    <option value="energy">能源与环境学院</option>
+                                    <option value="data">数据科学学院</option>
+                                    <option value="veterinary">兽医学院</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="difficulty" data-translate="difficulty">难度等级</label>
+                                <select id="difficulty" required>
+                                    <option value="" data-translate="select_difficulty">选择难度</option>
+                                    <option value="beginner" data-translate="beginner">入门</option>
+                                    <option value="intermediate" data-translate="intermediate">进阶</option>
+                                    <option value="advanced" data-translate="advanced">高级</option>
+                                    <option value="expert" data-translate="expert">专家</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="description" data-translate="description">描述</label>
+                                <textarea id="description" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tags" data-translate="tags">标签</label>
+                                <input type="text" id="tags" placeholder="用逗号分隔标签">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" data-translate="upload_file">上传文件</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- 最新帖子 -->
+                <div class="forum-content" data-content="recent">
+                    <div class="posts-grid">
+                        <!-- 帖子将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+                
+                <!-- 热门讨论 -->
+                <div class="forum-content" data-content="popular">
+                    <div class="posts-grid">
+                        <!-- 帖子将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 最新回复消息栏 -->
+            <div class="latest-replies">
+                <div class="latest-replies-header">
+                    <h3 data-translate="latest_replies">最新回复</h3>
+                </div>
+                <div class="latest-replies-content">
+                    <div class="reply-message">
+                        <div class="reply-avatar">
+                            <img src="images/default-avatar.svg" alt="用户头像">
+                        </div>
+                        <div class="reply-info">
+                            <div class="reply-user">张同学</div>
+                            <div class="reply-text">CS3103的课程笔记非常有用，谢谢分享！</div>
+                            <div class="reply-time">5分钟前</div>
+                        </div>
+                    </div>
+                    <div class="reply-message">
+                        <div class="reply-avatar">
+                            <img src="images/default-avatar.svg" alt="用户头像">
+                        </div>
+                        <div class="reply-info">
+                            <div class="reply-user">李同学</div>
+                            <div class="reply-text">有人有商学院的市场营销学复习资料吗？</div>
+                            <div class="reply-time">15分钟前</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 资源浏览 -->
+    <section id="resources" class="resources">
+        <div class="container">
+            <h2 class="section-title" data-translate="browse_resources">浏览资源</h2>
+            
+            <div class="advanced-filters">
+                <div class="filter-group">
+                    <label for="collegeFilter" data-translate="college">学院</label>
+                    <select id="collegeFilter">
+                        <option value="all" data-translate="all_colleges">所有学院</option>
+                        <option value="engineering">工学院</option>
+                        <option value="business">商学院</option>
+                        <option value="science">理学院</option>
+                        <option value="liberal">人文社科学院</option>
+                        <option value="law">法学院</option>
+                        <option value="creative">创意媒体学院</option>
+                        <option value="energy">能源与环境学院</option>
+                        <option value="data">数据科学学院</option>
+                        <option value="veterinary">兽医学院</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="courseTypeFilter" data-translate="file_type">文件类型</label>
+                    <select id="courseTypeFilter">
+                        <option value="all" data-translate="all_course_types">所有课程类型</option>
+                        <option value="notes" data-translate="course_notes">课程笔记</option>
+                        <option value="assignment" data-translate="assignment_answers">作业答案</option>
+                        <option value="review" data-translate="review_materials">复习资料</option>
+                        <option value="slides" data-translate="course_slides">课程课件</option>
+                        <option value="exams" data-translate="past_exams">往年试题</option>
+                        <option value="project" data-translate="project_reports">项目报告</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="difficultyFilter" data-translate="difficulty">难度等级</label>
+                    <select id="difficultyFilter">
+                        <option value="all" data-translate="all_difficulties">所有难度</option>
+                        <option value="beginner" data-translate="beginner">入门</option>
+                        <option value="intermediate" data-translate="intermediate">进阶</option>
+                        <option value="advanced" data-translate="advanced">高级</option>
+                        <option value="expert" data-translate="expert">专家</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="resourcesGrid" class="resources-grid">
+                <!-- 资源将通过JavaScript动态加载 -->
+            </div>
+            
+            <div id="pagination" class="pagination">
+                <!-- 分页将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-translate="about_us">关于我们</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p data-translate="about_description">Easy CityU致力于为香港城市大学学生提供最优质的学术资源管理平台，帮助同学们更好地学习和成长。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/cityu-logo.png" alt="CityU Logo" class="logo-img">
+                    <span class="logo-text" data-translate="site_name">Easy CityU</span>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-translate="quick_links">快速链接</h3>
+                    <ul>
+                        <li><a href="main.html" data-translate="home">首页</a></li>
+                        <li><a href="#resources" data-translate="browse">浏览资源</a></li>
+                        <li><a href="#forum" data-translate="forum">学生论坛</a></li>
+                        <li><a href="#about" data-translate="about">关于我们</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 data-translate="contact_us">联系我们</h3>
+                    <p>Email: info@easycityu.com</p>
+                    <p data-translate="phone">电话: +852 1234 5678</p>
+                </div>
+                
+                <div class="footer-social">
+                    <h3 data-translate="follow_us">关注我们</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Easy CityU. <span data-translate="all_rights_reserved">保留所有权利</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 拍照搜索模态框 -->
+    <div id="photoSearchModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-translate="photo_search">拍照搜索</h3>
+                <button id="closePhotoModal" class="close-modal" aria-label="关闭">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="camera-container">
+                    <video id="cameraVideo" autoplay playsinline></video>
+                    <canvas id="cameraCanvas" hidden></canvas>
+                </div>
+                
+                <div class="camera-controls">
+                    <button id="captureBtn" class="btn btn-primary" data-translate="capture">拍照</button>
+                    <button id="cancelCameraBtn" class="btn btn-outline" data-translate="cancel">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认对话框 -->
+    <div id="confirmDialog" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-translate="confirm_action">确认操作</h3>
+                <button class="close-modal" aria-label="关闭">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <p id="confirmMessage"></p>
+                
+                <div class="modal-buttons">
+                    <button id="cancelBtn" class="btn btn-outline" data-translate="cancel">取消</button>
+                    <button id="confirmBtn" class="btn btn-primary" data-translate="confirm">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通知容器 -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- 开发者联系方式 -->
+    <footer class="developer-contact">
+        <div class="contact-info">
+            <p class="contact-text">开发者联系方式：<span class="contact-number">98560429</span></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 模块 -->
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/hero-slider.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/camera.js"></script>
+    <script src="js/notification.js"></script>
+    <script src="js/forum-base.js"></script>
+    <script src="js/forum-posts.js"></script>
+    <script src="js/forum-replies.js"></script>
+    <script src="js/forum-upload.js"></script>
+    <script src="js/course-autocomplete.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/geometric.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

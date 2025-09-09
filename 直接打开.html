@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy CityU - 学术资源管理平台</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/fontawesome-local.css">
+    <meta name="description" content="Easy CityU - 香港城市大学学术资源管理平台，提供课程资料、论文、笔记等学术资源的分类管理和搜索服务。">
+    <!-- 预加载校徽图片 -->
+    <link rel="preload" href="images/cityu-logo.png" as="image">
+    
+    <style>
+        /* 确保所有资源都能正确加载 */
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+        }
+        
+        /* 启动选择器样式 */
+        .startup-selector {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            color: white;
+            text-align: center;
+        }
+        
+        .selector-content {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .selector-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #6ee1f5;
+            text-shadow: 0 0 20px rgba(110, 225, 245, 0.5);
+        }
+        
+        .selector-subtitle {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .selector-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .selector-btn {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .selector-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+            background: linear-gradient(45deg, #0056b3, #007bff);
+        }
+        
+        .selector-btn.primary {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            font-weight: bold;
+        }
+        
+        .selector-btn.primary:hover {
+            background: linear-gradient(45deg, #20c997, #28a745);
+        }
+        
+        .selector-note {
+            margin-top: 30px;
+            font-size: 0.9em;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .selector-content {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            
+            .selector-title {
+                font-size: 2em;
+            }
+            
+            .selector-subtitle {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 启动选择器 -->
+    <div class="startup-selector" id="startupSelector">
+        <div class="selector-content">
+            <h1 class="selector-title">🎓 Easy CityU</h1>
+            <p class="selector-subtitle">香港城市大学学术资源管理平台</p>
+            
+            <div class="selector-buttons">
+                <button class="selector-btn primary" onclick="startWithAnimation()">
+                    🎬 观看开场动画 + 进入网站
+                </button>
+                
+                <button class="selector-btn" onclick="goToMain()">
+                    🏠 直接进入主页面
+                </button>
+                
+                <button class="selector-btn" onclick="startServer()">
+                    🌐 启动本地服务器模式
+                </button>
+                
+                <a href="login.html" class="selector-btn">
+                    👤 用户登录
+                </a>
+                
+                <a href="register.html" class="selector-btn">
+                    📝 用户注册
+                </a>
+            </div>
+            
+            <div class="selector-note">
+                💡 <strong>提示:</strong><br>
+                • 推荐选择"观看开场动画"获得完整体验<br>
+                • 所有功能都已本地化，无需网络连接<br>
+                • 支持所有现代浏览器（Chrome、Firefox、Edge、Safari）
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 启动选择器功能
+        function startWithAnimation() {
+            // 隐藏选择器
+            document.getElementById('startupSelector').style.display = 'none';
+            
+            // 跳转到带动画的首页
+            window.location.href = 'index.html';
+        }
+        
+        function goToMain() {
+            // 隐藏选择器
+            document.getElementById('startupSelector').style.display = 'none';
+            
+            // 直接跳转到主页面
+            window.location.href = 'main.html';
+        }
+        
+        function startServer() {
+            alert('🚀 服务器模式启动说明:\n\n1. 双击 "启动网站.bat" 文件\n2. 或在命令行中运行: python -m http.server 8000\n3. 然后访问: http://localhost:8000\n\n这样可以获得最佳的网站体验！');
+        }
+        
+        // 键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case '1':
+                    startWithAnimation();
+                    break;
+                case '2':
+                    goToMain();
+                    break;
+                case '3':
+                    startServer();
+                    break;
+                case 'Escape':
+                    startWithAnimation();
+                    break;
+            }
+        });
+        
+        // 自动检测并显示浏览器信息
+        window.onload = function() {
+            const userAgent = navigator.userAgent;
+            let browserName = '未知浏览器';
+            
+            if (userAgent.includes('Chrome')) browserName = 'Google Chrome';
+            else if (userAgent.includes('Firefox')) browserName = 'Mozilla Firefox';
+            else if (userAgent.includes('Safari')) browserName = 'Safari';
+            else if (userAgent.includes('Edge')) browserName = 'Microsoft Edge';
+            
+            console.log(`🌐 当前浏览器: ${browserName}`);
+            console.log('✅ 网站已完全本地化，支持离线运行');
+            console.log('🎯 所有功能都已优化，确保兼容性');
+        };
+    </script>
+</body>
+</html>

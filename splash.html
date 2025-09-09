@@ -1,0 +1,136 @@
+<![CDATA[<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy CityU - 欢迎</title>
+    <style>
+        /* 这是您最初配置的动画样式 */
+        html, body {
+            left: 0; top: 0; width: 100%; height: 100%;
+            overflow: hidden; margin: 0; padding: 0;
+            background: #222;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        #firstshow {
+            display: flex; height: 100vh; justify-content: center; align-items: center;
+            text-align: center; left: 0; right: 0; top: 0; bottom: 0;
+            position: absolute; z-index: 10; flex-direction: column;
+        }
+        .reveal {
+            position: relative; display: flex; color: #6ee1f5; font-size: 2em;
+            font-family: Raleway, sans-serif; letter-spacing: 3px; text-transform: uppercase;
+            white-space: pre; justify-content: center; width: 100%;
+        }
+        .reveal span {
+            opacity: 0; transform: scale(0); animation: fadeIn 2.4s forwards;
+        }
+        .reveal::before, .reveal::after {
+            position: absolute; content: ""; top: 0; bottom: 0; width: 2px; height: 100%;
+            background: white; opacity: 0; transform-origin: center;
+        }
+        .reveal::before {
+            left: 50%; transform: scaleX(0);
+            animation: expandLeft 2s cubic-bezier(0.7, -0.6, 0.3, 1.5) forwards;
+        }
+        .reveal::after {
+            right: 50%; transform: scaleX(0);
+            animation: expandRight 2s cubic-bezier(0.7, -0.6, 0.3, 1.5) forwards;
+        }
+        @keyframes fadeIn { to { opacity: 1; transform: scale(1); } }
+        @keyframes expandLeft {
+            0% { left: 50%; opacity: 0; transform: scaleX(0); }
+            30% { opacity: 1; transform: scaleX(1); }
+            100% { left: calc(50% - 48%); opacity: 1; transform: scaleX(1); }
+        }
+        @keyframes expandRight {
+            0% { right: 50%; opacity: 0; transform: scaleX(0); }
+            30% { opacity: 1; transform: scaleX(1); }
+            100% { right: calc(50% - 48%); opacity: 1; transform: scaleX(1); }
+        }
+        .glowIn {
+            color: white; text-align: center; width: 100%;
+            line-height: 1.8; font-family: 'KaiTi', '楷体', serif;
+            position: relative; top: 40px;
+        }
+        .glowIn span { animation: glow-in 0.8s both; display: inline-block; }
+        @keyframes glow-in {
+            from { opacity: 0; }
+            65% { opacity: 1; text-shadow: 0 0 25px white; }
+            75% { opacity: 1; }
+            to { opacity: 0.7; }
+        }
+        .loading-text {
+            position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+            color: white; font-size: 1.2em; opacity: 0;
+            animation: fadeInOut 2s infinite; animation-delay: 4s;
+        }
+        @keyframes fadeInOut { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .reveal { font-size: 1.5em; letter-spacing: 2px; }
+            .glowIn { font-size: 0.9em; }
+            @keyframes expandLeft { 100% { left: calc(50% - 45%); } }
+            @keyframes expandRight { 100% { right: calc(50% - 45%); } }
+        }
+    </style>
+</head>
+<body>
+    <div id="firstshow">
+        <div class="reveal">City University of Hong Kong</div>
+        <p class="glowIn">觀 古 今 之 變 通 ， 探 宇 宙 之 真 理</p>
+        <div class="loading-text">正在進入 Easy CityU...</div>
+    </div>
+
+    <script>
+        "use strict";
+
+        // 统一的跳转函数，确保写入标记并替换历史记录
+        function goToMainPage() {
+            try {
+                // 写入“已播放”标记
+                localStorage.setItem('splashPlayed', '1');
+            } catch (e) {
+                // 如果本地存储不可用，则忽略
+            }
+            // 使用 replace 跳转，避免动画页进入浏览器历史
+            window.location.replace("main.html");
+        }
+
+        // 动画主标题
+        const revealText = document.querySelector(".reveal");
+        const letters = revealText.textContent.split("");
+        revealText.textContent = "";
+        const middle = letters.filter(e => e !== " ").length / 2;
+        letters.forEach((letter, i) => {
+            const span = document.createElement("span");
+            span.textContent = letter;
+            span.style.animationDelay = `${0.3 + Math.abs(i - middle) * 0.1}s`;
+            revealText.append(span);
+        });
+
+        // 动画副标题
+        const glowInText = document.querySelector(".glowIn");
+        const subLetters = glowInText.textContent.split("");
+        glowInText.textContent = "";
+        subLetters.forEach((letter, i) => {
+            const span = document.createElement("span");
+            span.textContent = letter;
+            span.style.animationDelay = `${i * 0.05 + 3}s`; // 在主标题动画后开始
+            glowInText.append(span);
+        });
+
+        // 6秒后自动跳转
+        const autoRedirectTimeout = setTimeout(goToMainPage, 6000);
+
+        // 添加一次性事件监听器，用于跳过动画
+        function skipAnimation() {
+            clearTimeout(autoRedirectTimeout); // 取消自动跳转
+            goToMainPage();
+        }
+        document.addEventListener('click', skipAnimation, { once: true });
+        document.addEventListener('keydown', skipAnimation, { once: true });
+    </script>
+</body>
+</html>
+]]>
